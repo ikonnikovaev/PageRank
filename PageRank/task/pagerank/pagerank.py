@@ -31,10 +31,29 @@ def pagerank(link_matrix,d):
 
 
 
-n, d =input().split()
-n = int(n)
-d = float(d)
+n = int(input())
+sites = input().split()
 L = read_matrix(n)
-print_matrix(pagerank(L, d))
+d = 0.5
+
+# print_matrix(pagerank(L, d))
+pr = np.ndarray.flatten(pagerank(L, d))
+
+
+query = input()
+top = min(n, 5)
+for i in range(n):
+    if sites[i] == query:
+        top -= 1
+        pr[i] = 0
+        print(query)
+
+sites_and_ranks = list(zip(sites, list(pr)))
+sites_and_ranks.sort(key=lambda x: x[1])
+sites_and_ranks.reverse()
+#print(sites_and_ranks)
+for i in range(top):
+    print(sites_and_ranks[i][0])
+
 
 
